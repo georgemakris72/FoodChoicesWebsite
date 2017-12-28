@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="utf-8">
+      <title>{% block head_title %} MuyPicky.com {% endblock head_title %}</title>
+        {% include 'snippets/css.html' %}
+        <!-- include tag can be used on any html page not just base -->
+    </head>
+    <body>
+      {% include 'snippets/nav.html' %}
+      <div class='container'>
+
+    {% block content %}
+    {% endblock content %}
+  </div>
+      {% include 'snippets/js.html' %}
+    </body>
+  </html>

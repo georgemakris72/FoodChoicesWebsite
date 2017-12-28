@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block head_title %} {{ user.username }} | {{block.super}} {% endblock head_title %}
+
+
+{% block content %}
+<h1>{{ user.username }} </h1>
+<form class='form' method='GET' action='.'>
+<input type='text' placeholder="Search.." name="q" value= '{{request.GET.q}}'>
+<button class='btn btn-default' type='submit'>Search</button>
+</form>
+<hr>
+<!-- {{ user.restaurantlocation_set.all }}<br> -->
+
+<!-- {% if user.item_set.all.exists %} -->
+
+<!-- {% for rest in user.restaurantlocation_set.all %}{%endfor%} -->
+{% if locations %}
+{% for rest in locations %}
+
+<div class='row'>
+
+<div class='col-sm-12'>
+  <div class="thumbnail">
+   <h3>{{rest.title}} </h3>
+  <p>{{rest.location}} | {{rest.category}}</p>
+
+  <p>
+  <ul>
+    {% for item in rest.item_set.all %}
+      <li style='margin-bottom:15px;'> <b>{{item.name}}</b><br>
+      <!-- {% for ing in item.get_contents %}
+      <span style='padding:2px 4px; margin-right:4px; background-color:#ccc;'>{{ ing }}</span>
+      {% endfor %} -->
+      <span><i>Contains: &nbsp; </i></span>
+      {% for ing in item.get_contents %}
+  <span class= "badge badge-default">{{ing}}</span>
+      {% endfor %}
+
+    </li>
+      {% endfor %}
+  </ul>
+</p>
+</div>
+</div>
+</div>
+{% endfor %}
+
+{% else %}
+<p class='lead'> No Items Found</p>
+<!-- {{ user.item_set.all }} -->
+{% endif %}
+<!-- {% endif %} -->
+{% endblock %}
